@@ -1,0 +1,239 @@
+/* ==========================================================================
+   VARIABLES ET CONFIGURATION GÉNÉRALE
+   ========================================================================== */
+
+:root {
+    /* Couleurs du thème basées sur une palette moderne (Slate/Blue) */
+    --bg-main: #f8fafc;        /* Gris très clair pour le fond de page */
+    --sidebar-bg: #0f172a;     /* Bleu nuit profond pour le menu latéral */
+    --accent: #3b82f6;         /* Bleu vif pour les éléments interactifs */
+    --border: #e2e8f0;         /* Gris subtil pour les séparations */
+    --text-dark: #1e293b;      /* Couleur principale du texte */
+    --text-light: #64748b;     /* Couleur pour le texte secondaire/moins important */
+}
+
+* { 
+    box-sizing: border-box;    /* Inclut padding et bordures dans le calcul de la largeur */
+    margin: 0; 
+    padding: 0; 
+}
+
+body { 
+    font-family: 'Inter', sans-serif; 
+    background: var(--bg-main); 
+    color: var(--text-dark); 
+    overflow-x: hidden;        /* Évite le défilement horizontal indésirable */
+}
+
+/* Conteneur principal utilisant Flexbox pour aligner Sidebar et Content */
+.app-container { 
+    display: flex; 
+    min-height: 100vh; 
+}
+
+/* ==========================================================================
+   SIDEBAR (BARRE LATÉRALE)
+   ========================================================================== */
+
+.sidebar { 
+    width: 260px; 
+    background: var(--sidebar-bg); 
+    color: white; 
+    position: fixed;           /* Fixe le menu à gauche pendant le scroll */
+    height: 100vh; 
+    padding: 40px 20px; 
+}
+
+/* Bloc Profil Utilisateur */
+.avatar { 
+    width: 50px; 
+    height: 50px; 
+    background: var(--accent); 
+    border-radius: 12px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: 700; 
+    margin-bottom: 15px; 
+}
+
+.identity .name { 
+    display: block; 
+    font-weight: 700; 
+    font-size: 1.1rem; 
+}
+
+.identity .status { 
+    font-size: 0.8rem; 
+    color: #94a3b8; 
+}
+
+/* Menu de Navigation */
+.nav-menu { 
+    list-style: none; 
+    margin-top: 50px; 
+}
+
+.nav-menu li { 
+    margin-bottom: 20px; 
+}
+
+.nav-menu a { 
+    color: #94a3b8; 
+    text-decoration: none; 
+    font-size: 0.9rem; 
+    font-weight: 500; 
+    transition: 0.3s;          /* Transition douce pour le changement de couleur */
+}
+
+.nav-menu a:hover { 
+    color: white;              /* Éclaircissement au survol */
+}
+
+/* ==========================================================================
+   ZONE DE CONTENU (MAIN CONTENT)
+   ========================================================================== */
+
+.content { 
+    flex: 1;                   /* Prend tout l'espace restant */
+    margin-left: 260px;        /* Compense la largeur de la sidebar fixe */
+    padding: 60px 10%; 
+}
+
+/* En-tête de page */
+.top-bar { 
+    margin-bottom: 60px; 
+    border-bottom: 1px solid var(--border); 
+    padding-bottom: 30px; 
+}
+
+.top-bar h1 { 
+    font-size: 2.5rem; 
+    letter-spacing: -1px;      /* Style typographique serré */
+}
+
+.top-bar p { 
+    color: var(--text-light); 
+    margin-top: 10px; 
+}
+
+.section { 
+    margin-bottom: 50px; 
+}
+
+/* Labels de catégories */
+.label { 
+    font-size: 0.75rem; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    color: var(--accent); 
+    margin-bottom: 25px; 
+    font-weight: 700; 
+}
+
+/* ==========================================================================
+   COMPOSANTS (LIGNES ET ACCORDÉONS)
+   ========================================================================== */
+
+/* Ligne d'item standard */
+.item-row { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 20px; 
+    background: white; 
+    border: 1px solid var(--border); 
+    border-radius: 8px; 
+    margin-bottom: 12px; 
+}
+
+.item-row .date { 
+    font-weight: 600; 
+    font-size: 0.9rem; 
+    color: var(--text-light); 
+    width: 120px; 
+}
+
+/* Cartes Accordéon */
+.acc-card { 
+    background: white; 
+    border: 1px solid var(--border); 
+    border-radius: 8px; 
+    margin-bottom: 15px; 
+    overflow: hidden; 
+    transition: 0.2s; 
+}
+
+.acc-card:hover { 
+    border-color: var(--accent); 
+}
+
+/* En-tête cliquable de l'accordéon */
+.acc-trigger { 
+    padding: 20px; 
+    cursor: pointer; 
+    display: flex; 
+    justify-content: space-between; 
+    font-weight: 600; 
+    font-size: 1rem; 
+}
+
+/* Panneau masqué par défaut */
+.acc-panel { 
+    max-height: 0;             /* Hauteur nulle pour cacher le contenu */
+    padding: 0 20px; 
+    transition: 0.3s ease-out; /* Animation fluide de l'ouverture */
+    background: #fcfcfd; 
+}
+
+/* État actif de l'accordéon (géré via JavaScript) */
+.acc-card.active .acc-panel { 
+    max-height: 500px;         /* Hauteur max suffisante pour afficher le texte */
+    padding: 20px; 
+    border-top: 1px solid var(--border); 
+}
+
+/* Boutons d'action */
+.drive-link { 
+    display: inline-flex; 
+    align-items: center; 
+    padding: 10px 18px; 
+    background: var(--accent); 
+    color: white; 
+    text-decoration: none; 
+    border-radius: 6px; 
+    font-size: 0.85rem; 
+    font-weight: 600; 
+    margin-top: 15px; 
+}
+
+footer { 
+    margin-top: 100px; 
+    padding: 40px 0; 
+    border-top: 1px solid var(--border); 
+    color: var(--text-light); 
+    font-size: 0.8rem; 
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (TABLETTES ET MOBILES)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    /* Passage en mode colonne : le sidebar se place au-dessus du contenu */
+    .app-container { 
+        flex-direction: column; 
+    }
+    
+    .sidebar { 
+        width: 100%; 
+        height: auto; 
+        position: relative;    /* On annule la position fixe sur mobile */
+        padding: 20px; 
+    }
+    
+    .content { 
+        margin-left: 0;        /* On annule la marge car le menu n'est plus à gauche */
+        padding: 40px 20px; 
+    }
+}
