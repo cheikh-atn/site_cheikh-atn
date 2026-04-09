@@ -18,6 +18,12 @@ const myData = {
             { label: "mt dans une liaison optique.", url: "LIEN_DRIVE" }]
     }, 
      {
+        nom: "Technologies de la securité",
+        details: "Distribution Linux (Ubuntu, Alpine...), Windows.",
+        documents: [
+            { label: "mt dans une liaison optique.", url: "LIEN_DRIVE" }]
+    }, 
+     {
         nom: "Traitement d’image et vision par ordinateur ",
         details: "Distribution Linux (Ubuntu, Alpine...), Windows.",
         documents: [
@@ -66,7 +72,7 @@ const myData = {
          {
             nom: "Huawei:Data Communication and Network",
             details: "Validation officielle des compétences réseaux.",
-            documents: [{ label: "Certificat PDF", url: "LIEN_DRIVE" } 
+            documents: [{ label: "Certificat PDF", url: "https://www.credly.com/badges/3136558c-6ac1-4dc0-a3f8-f7c587dd77c4/public_url" } 
             ]
         },
         {

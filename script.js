@@ -60,4 +60,4 @@ document.addEventListener("DOMContentLoaded", () => {
     // Génère la liste des certifications dans l'élément 'list-certs'
     renderAccordions(myData.certifications, 'list-certs');
 
-}); // Fin de l'événement DOMContentLoaded
+}); // Fin de l'événement DOMContentLoaded  n
