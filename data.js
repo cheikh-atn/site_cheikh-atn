@@ -78,13 +78,13 @@ const myData = {
         {
             nom: "Cisco:Networking Devices and Initial Configuration",
             details: " Cisco:Validation officielle des compétences réseaux.",
-            documents: [{ label: "Certificat PDF", url: "LIEN_DRIVE" } 
+            documents: [{ label: "Certificat PDF", url: "https://www.credly.com/badges/0205924f-6922-491e-8d75-6ac754252a04/public_url" } 
             ]
         },
         {
             nom: "Cisco:Introduction to Cybersecurity",
             details: "Validation officielle des compétences réseaux.",
-            documents: [{ label: "Certificat PDF", url: "LIEN_DRIVE" } 
+            documents: [{ label: "Certificat PDF", url: "https://www.credly.com/badges/dbb01867-9e4f-4f93-9e1e-03c008c1f33f/public_url" } 
             ]
         }  
         
