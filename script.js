@@ -1,63 +1,130 @@
-// On attend que tout le contenu HTML (le DOM) soit chargé avant de lancer le script
 document.addEventListener("DOMContentLoaded", () => {
-    
-    /* === 1. REMPLISSAGE DE LA SECTION PARCOURS === */
 
-    // On cible le conteneur où s'affichera la liste du parcours
-    const pList = document.getElementById('list-parcours');
-    
-    // On crée une copie du tableau parcours, on le trie par ID décroissant (du plus récent au plus ancien)
-    [...myData.parcours].sort((a,b) => b.id - a.id).forEach(item => {
-        // On ajoute le code HTML pour chaque ligne de formation dans le conteneur
-        pList.innerHTML += `
-            <div class="item-row">
-                <span class="date">${item.date}</span> <div style="flex:1">
-                    <div style="font-weight:700">${item.titre}</div> <div style="color:var(--text-light); font-size:0.9rem">${item.lieu}</div> </div>
-            </div>`;
+    /* ── TERMINAL ANIMATION ── */
+    const lines = [
+        { cmd: "whoami", outputs: [
+            { id: "t-line1", text: "→ Cheikh Ahmed Tidiane NDIOM", cls: "" },
+            { id: "t-line2", text: "→ L3 Systèmes, Réseaux & Télécommunications", cls: "info" },
+            { id: "t-line3", text: "→ Passionnée de: la Cybersécurité · l'IA · l'Infrastructure Réseau · du Cloud computing", cls: "info" }
+        ]}
+    ];
+
+    const typedEl = document.getElementById("typed-text");
+    const cmd = lines[0].cmd;
+    let i = 0;
+
+    function typeChar() {
+        if (i < cmd.length) {
+            typedEl.textContent += cmd[i++];
+            setTimeout(typeChar, 80 + Math.random() * 40);
+        } else {
+            // Show outputs after typing
+            setTimeout(() => {
+                lines[0].outputs.forEach((out, idx) => {
+                    setTimeout(() => {
+                        const el = document.getElementById(out.id);
+                        if (el) {
+                            el.textContent = out.text;
+                            if (out.cls) el.classList.add(out.cls);
+                        }
+                    }, idx * 200);
+                });
+            }, 300);
+        }
+    }
+
+    setTimeout(typeChar, 800);
+
+    /* ── PARCOURS TIMELINE ── */
+    const pList = document.getElementById("list-parcours");
+    [...myData.parcours].sort((a, b) => b.id - a.id).forEach(item => {
+        const div = document.createElement("div");
+        div.className = "timeline-item";
+        div.innerHTML = `
+            <div class="timeline-date">${item.date}</div>
+            <div class="timeline-title">${item.titre}</div>
+            <div class="timeline-lieu">${item.lieu}</div>
+        `;
+        pList.appendChild(div);
     });
 
-    /* === 2. FONCTION POUR GÉNÉRER LES ACCORDÉONS === */
+    /* ── PROJETS GRID ── */
+    const projGrid = document.getElementById("list-projets");
+    myData.projets.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "project-card";
+        const techBadges = p.tech.map(t => `<span class="tech-badge">${t}</span>`).join("");
+        card.innerHTML = `
+            <div class="project-icon">${p.icon}</div>
+            <div class="project-name">${p.nom}</div>
+            <div class="project-desc">${p.desc}</div>
+            <div class="project-tech">${techBadges}</div>
+        `;
+        projGrid.appendChild(card);
+    });
 
-    // Cette fonction prend des données (tableau) et l'ID du conteneur cible pour créer des menus déroulants
-    const renderAccordions = (data, containerId) => {
-        // On récupère le conteneur dans le HTML
-        const container = document.getElementById(containerId);
-        
-        // Pour chaque objet dans les données (compétence ou certification)
-        data.forEach(item => {
-            // On crée un élément div qui servira de carte
-            const card = document.createElement('div');
-            // On lui donne la classe CSS définie dans style.css
-            card.className = 'acc-card';
-            
-            // On définit la structure interne de la carte (titre cliquable + panneau caché)
-            card.innerHTML = `
-                <div class="acc-trigger">${item.nom} <span>+</span></div>
-                <div class="acc-panel">
-                    <p style="font-size:0.9rem; color:var(--text-light)">${item.details}</p>
-                    ${item.documents.map(d => `<a href="${d.url}" target="_blank" class="drive-link">${d.label}</a>`).join('')}
-                </div>
-            `;
-            
-            // On ajoute un écouteur d'événement sur le titre pour gérer le clic
-            card.querySelector('.acc-trigger').addEventListener('click', () => {
-                // On bascule la classe 'active' (si elle y est, on l'enlève, sinon on l'ajoute)
-                card.classList.toggle('active');
-                // On change le symbole visuel selon l'état d'ouverture (+ ou −)
-                card.querySelector('span').textContent = card.classList.contains('active') ? '−' : '+';
-            });
-            
-            // On injecte enfin la carte terminée dans le conteneur principal
-            container.appendChild(card);
+    /* ── COMPÉTENCES (ACCORDION) ── */
+    const skillsGrid = document.getElementById("list-skills");
+    myData.competences.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "skill-card";
+        const links = item.documents.map(d =>
+            `<a href="${d.url}" target="_blank" class="drive-link">↗ ${d.label}</a>`
+        ).join("");
+        card.innerHTML = `
+            <div class="skill-trigger">
+                <span class="skill-icon">${item.icon}</span>
+                <span style="flex:1">${item.nom}</span>
+                <span class="chevron">+</span>
+            </div>
+            <div class="skill-panel">
+                <p class="skill-detail">${item.details}</p>
+                ${links}
+            </div>
+        `;
+        card.querySelector(".skill-trigger").addEventListener("click", () => {
+            const isOpen = card.classList.toggle("open");
+            card.querySelector(".chevron").textContent = isOpen ? "×" : "+";
         });
-    };
+        skillsGrid.appendChild(card);
+    });
 
-    /* === 3. APPEL DES FONCTIONS POUR REMPLIR LA PAGE === */
+    /* ── CERTIFICATIONS ── */
+    const certsGrid = document.getElementById("list-certs");
+    myData.certifications.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "cert-card";
+        const links = item.documents.map(d =>
+            `<a href="${d.url}" target="_blank" class="drive-link">↗ ${d.label}</a>`
+        ).join("");
+        card.innerHTML = `
+            <div class="cert-issuer">${item.issuer}</div>
+            <div class="cert-name">${item.nom}</div>
+            <div class="cert-desc">${item.details}</div>
+            ${links}
+        `;
+        certsGrid.appendChild(card);
+    });
 
-    // Génère la liste des compétences dans l'élément 'list-skills'
-    renderAccordions(myData.competences, 'list-skills');
-    
-    // Génère la liste des certifications dans l'élément 'list-certs'
-    renderAccordions(myData.certifications, 'list-certs');
+    /* ── SCROLL REVEAL ── */
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-}); // Fin de l'événement DOMContentLoaded  n
+    /* ── ACTIVE NAV ── */
+    const sections = document.querySelectorAll("section[id]");
+    const navItems = document.querySelectorAll(".nav-item[data-section]");
+
+    const navObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                navItems.forEach(n => n.classList.remove("active"));
+                const active = document.querySelector(`.nav-item[data-section="${e.target.id}"]`);
+                if (active) active.classList.add("active");
+            }
+        });
+    }, { threshold: 0.4 });
+
+    sections.forEach(s => navObserver.observe(s));
+});
