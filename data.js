@@ -3,7 +3,7 @@ const myData = {
   parcours: [
     { id: 3, date: "2025 – 2026", titre: "Licence 3 — Systèmes, Réseaux et Télécommunications", lieu: "École Supérieure Polytechnique (ESP) de Dakar" },
     { id: 2, date: "2023 – 2025", titre: "DST — Systèmes, Réseaux et Télécommunications",       lieu: "École Supérieure Polytechnique (ESP) de Dakar" },
-    { id: 1, date: "2022",        titre: "Baccalauréat Scientifique — Série S",                   lieu: "Lycée Ababacar SY" }
+    { id: 1, date: "2022",        titre: "Baccalauréat Scientifique — Série S2",                   lieu: "Lycée Ababacar SY" }
   ],
 
   about: [
@@ -62,7 +62,7 @@ const myData = {
   ],
 
   certifications: [
-    { issuer: "ESP Dakar",      nom: "DST — Systèmes Réseaux et Télécommunications",        desc: "Diplôme Supérieur de Technologie, ESP de Dakar.",                                                                     documents: [{ label: "Voir le diplôme",  url: "LIEN_DRIVE" }] },
+    { issuer: "ESP Dakar",      nom: "DST — Systèmes Réseaux et Télécommunications",        desc: "Diplôme Supérieur de Technologie, ESP de Dakar.",                                                                     documents: [{ label: "Voir le diplôme",  url: "https://drive.google.com/file/d/1aWe4l9gpsZzbmXrfeGNyEdfeLX9_YXZ8/view?usp=drive_link" }] },
     { issuer: "Huawei Talent",  nom: "Data Communication and Network Technologies",          desc: "Certification officielle Huawei — compétences en communications de données et technologies réseau.",                  documents: [{ label: "Voir sur Credly",  url: "https://www.credly.com/badges/3136558c-6ac1-4dc0-a3f8-f7c587dd77c4/public_url" }] },
     { issuer: "Cisco",          nom: "Networking Devices and Initial Configuration",          desc: "Configuration initiale et gestion des équipements réseau Cisco.",                                                    documents: [{ label: "Voir sur Credly",  url: "https://www.credly.com/badges/0205924f-6922-491e-8d75-6ac754252a04/public_url" }] },
     { issuer: "Cisco",          nom: "Introduction to Cybersecurity",                         desc: "Fondamentaux de la cybersécurité : menaces, vulnérabilités, bonnes pratiques.",                                      documents: [{ label: "Voir sur Credly",  url: "https://www.credly.com/badges/dbb01867-9e4f-4f93-9e1e-03c008c1f33f/public_url" }] }
