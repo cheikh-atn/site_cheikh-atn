@@ -3,7 +3,7 @@ const myData = {
   parcours: [
     { id: 3, date: "2025 – 2026", titre: "Licence 3 — Systèmes, Réseaux et Télécommunications", lieu: "École Supérieure Polytechnique (ESP) de Dakar" },
     { id: 2, date: "2023 – 2025", titre: "DST — Systèmes, Réseaux et Télécommunications",       lieu: "École Supérieure Polytechnique (ESP) de Dakar" },
-    { id: 1, date: "2022",        titre: "Baccalauréat Scientifique — Série S",                   lieu: "Lycée Ababacar SY" }
+    { id: 1, date: "2022",        titre: "Baccalauréat Scientifique — Série S2",                   lieu: "Lycée Ababacar SY" }
   ],
 
   about: [
@@ -23,15 +23,15 @@ const myData = {
     },
     {
       icon: "🚁", ctx: "Stage ISFAD Dakar · Section RDI",
-      nom: "UAV-D+ — Optimisation de drones",
+      nom: "UAV-D+ — Optimisation de drones uav moyens",
       desc: "Développement complet d'un système d'aide à la génération de structures topologiques optimisées pour améliorer l'autonomie des drones UAV moyens.",
-      tech: ["Algorithmique", "Topologie", "Systèmes embarqués"]
+      tech: ["Algorithmique", "Topologie", "Système d'optmisation"]
     },
     {
       icon: "🌐", ctx: "Projets CCNA · ESP Dakar",
       nom: "Administration Réseau Cisco",
       desc: "Configuration VLAN, routage statique/dynamique sur équipements Cisco. Déploiement DHCP, DNS, Apache, Mail. Supervision réseau avec Nagios.",
-      tech: ["Cisco IOS", "VLAN", "OSPF", "EIGRP", "GNS3", "Nagios"]
+      tech: ["Cisco IOS", "VLAN", "Technologie INTERNET", "GNS3", "Nagios"]
     },
     {
       icon: "✉️", ctx: "Projet Linux · ESP Dakar",
