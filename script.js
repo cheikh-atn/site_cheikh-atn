@@ -13,9 +13,9 @@ const spy = new IntersectionObserver(es => es.forEach(en => {
 }), { rootMargin: "-40% 0px -55% 0px" });
 $("main section[id]").forEach(s => spy.observe(s));
 
-/* révélation au scroll avec décalage entre frères */
+/* apparition au scroll, avec décalage entre éléments voisins */
 if (!reduce) {
-  const targets = $("h2,.eb,.intro,.about p,.langs,.focus .card,.tl li,.exp .card,.proj,details,.cert,.stats div");
+  const targets = $(".shead,h2,.intro,.atext p,.langs,.focus li,.tl li,.exp .card,.proj,details,.cert,.stats div");
   targets.forEach(el => {
     const sibs = [...el.parentElement.children].filter(c => targets.includes(c));
     el.style.setProperty("--d", Math.min(sibs.indexOf(el), 5) * 0.08 + "s");
@@ -25,14 +25,14 @@ if (!reduce) {
     if (!en.isIntersecting) return;
     const el = en.target; el.classList.add("in"); io.unobserve(el);
     el.addEventListener("transitionend", () => el.classList.remove("rv", "in"), { once: true });
-  }), { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+  }), { threshold: 0.1, rootMargin: "0px 0px -5% 0px" });
   targets.forEach(el => io.observe(el));
 }
 
 /* compteurs */
 $("[data-n]").forEach(el => {
-  const end = +el.dataset.n, suf = el.dataset.s || "";
   if (reduce) return;
+  const end = +el.dataset.n, suf = el.dataset.s || "";
   el.textContent = "0" + suf;
   new IntersectionObserver(([en], o) => {
     if (!en.isIntersecting) return; o.disconnect();
@@ -45,15 +45,15 @@ $("[data-n]").forEach(el => {
   }, { threshold: 1 }).observe(el);
 });
 
-/* barre de progression + parallaxe photo */
-const bar = document.getElementById("bar"), img = document.querySelector(".hero figure img");
-let tick = false;
+/* barre de progression + parallaxe de la photo */
+const bar = document.getElementById("bar"), img = document.querySelector(".ph img");
+let busy = false;
 addEventListener("scroll", () => {
-  if (tick) return; tick = true;
+  if (busy) return; busy = true;
   requestAnimationFrame(() => {
     const y = scrollY, max = document.documentElement.scrollHeight - innerHeight;
     bar.style.setProperty("--p", max > 0 ? y / max : 0);
-    if (!reduce && y < innerHeight) img.style.setProperty("--py", y * 0.08 + "px");
-    tick = false;
+    if (!reduce && img && y < innerHeight) img.style.setProperty("--py", y * 0.06 + "px");
+    busy = false;
   });
 }, { passive: true });
